@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	name := "Todd McLeod"
+	name := "Alejandro Velez"
 
 	tpl := `
 	<!DOCTYPE html>
