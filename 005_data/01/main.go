@@ -7,11 +7,29 @@ import (
 )
 
 var tpl *template.Template
-var examples []string
+var examples []exStruct
+
+type exStruct struct {
+	name  string
+	power int
+}
+
+func exFunc1(ex exStruct) string {
+	return ex.name
+}
+
+func exFunc2(ex exStruct) int {
+	return ex.power
+}
 
 func init() {
-	tpl = template.Must(template.ParseFiles("tpl.gohtml"))
-	examples = []string{"donuts", "fire", "golang"}
+	fMap := template.FuncMap{
+		"getName":  exFunc1,
+		"getPower": exFunc2,
+	}
+	tpl = template.Must(template.New("").Funcs(fMap).ParseFiles("tpl.gohtml"))
+
+	examples = []exStruct{{"A", 5}, {"B", 6}, {"C", 7}}
 }
 
 func main() {
