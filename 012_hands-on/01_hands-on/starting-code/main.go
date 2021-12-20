@@ -72,7 +72,7 @@ func main() {
 		},
 	}
 
-	err := tpl.Execute(os.Stdout, nil)
+	err := tpl.ExecuteTemplate(os.Stdout, "tpl.gohtml", years)
 	if err != nil {
 		log.Fatalln(err)
 	}

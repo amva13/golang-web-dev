@@ -7,18 +7,23 @@ import (
 )
 
 var tpl *template.Template
-var examples []exStruct
+var examples []exCompose
 
 type exStruct struct {
 	name  string
 	power int
 }
 
-func exFunc1(ex exStruct) string {
+type exCompose struct {
+	*exStruct // composition
+	isGood    bool
+}
+
+func exFunc1(ex exCompose) string {
 	return ex.name
 }
 
-func exFunc2(ex exStruct) int {
+func exFunc2(ex exCompose) int {
 	return ex.power
 }
 
@@ -26,11 +31,13 @@ func init() {
 	fMap := template.FuncMap{
 		"getName":   exFunc1,
 		"getPower":  exFunc2,
-		"getStruct": func(ex exStruct) exStruct { return ex },
+		"getStruct": func(ex exCompose) exCompose { return ex },
 	}
 	tpl = template.Must(template.New("").Funcs(fMap).ParseGlob("*.gohtml"))
-
-	examples = []exStruct{{"A", 5}, {"B", 6}, {"C", 7}}
+	exA := exStruct{"A", 5}
+	exB := exStruct{"B", 6}
+	exC := exStruct{"C", 7}
+	examples = []exCompose{{&exA, true}, {&exB, false}, {&exC, true}}
 }
 
 func main() {
