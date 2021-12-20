@@ -24,8 +24,9 @@ func exFunc2(ex exStruct) int {
 
 func init() {
 	fMap := template.FuncMap{
-		"getName":  exFunc1,
-		"getPower": exFunc2,
+		"getName":   exFunc1,
+		"getPower":  exFunc2,
+		"getStruct": func(ex exStruct) exStruct { return ex },
 	}
 	tpl = template.Must(template.New("").Funcs(fMap).ParseFiles("tpl.gohtml"))
 

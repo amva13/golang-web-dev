@@ -7,7 +7,7 @@
 <body>
 {{$x := .}}
 {{range $x}}
-<h1> My meaning of life: {{getName .}}, {{getPower .}}</h1>
+<h1> My meaning of life: {{. | getStruct | getName}}, {{. | getStruct | getPower}}</h1>
 {{end}}
 </body>
 </html>
