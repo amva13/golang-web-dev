@@ -6,6 +6,8 @@
 </head>
 <body>
 {{$x := .}}
-<h1> My meaning of life: {{$x}}</h1>
+{{range $x}}
+<h1> My meaning of life: {{.}}</h1>
+{{end}}
 </body>
 </html>
