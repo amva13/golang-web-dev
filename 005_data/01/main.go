@@ -28,7 +28,7 @@ func init() {
 		"getPower":  exFunc2,
 		"getStruct": func(ex exStruct) exStruct { return ex },
 	}
-	tpl = template.Must(template.New("").Funcs(fMap).ParseFiles("tpl.gohtml"))
+	tpl = template.Must(template.New("").Funcs(fMap).ParseGlob("*.gohtml"))
 
 	examples = []exStruct{{"A", 5}, {"B", 6}, {"C", 7}}
 }
